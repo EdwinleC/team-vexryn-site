@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#02050a">
+  <title>Team Vexryn | CS2</title>
+  <meta name="description" content="Official home of Team Vexryn. South African Counter-Strike 2 team.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Orbitron:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="vex-cursor" id="vexCursor"><span></span></div>
+<div class="lightning" id="lightning"></div>
+<div class="ambient"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<div class="boot" id="boot">
+  <div class="boot-inner">
+    <img src="assets/vexryn-logo.png" alt="Vexryn logo" class="boot-logo">
+    <div class="boot-lines">
+      <p>VEXRYN SYSTEM // ONLINE</p>
+      <p>PLAYERS // 5/5 CONNECTED</p>
+      <p>REGION // SOUTH AFRICA</p>
+    </div>
+    <button id="enterBtn" class="btn primary">ENTER VEXRYN</button>
+  </div>
+</div>
+
+<header>
+  <a class="brand" href="#home"><img src="assets/vexryn-logo.png" alt=""><span>VEXRYN</span></a>
+  <button class="menu" id="menuBtn">☰</button>
+  <nav id="nav">
+    <a href="#roster">Roster</a><a href="#matches">Matches</a><a href="#stats">Stats</a><a href="#media">Media</a><a href="#about">About</a>
+  </nav>
+  <div class="status"><i></i> VEXRYN // ONLINE</div>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="grid"></div>
+  <div class="hero-copy reveal">
+    <p class="kicker">SOUTH AFRICA // COUNTER-STRIKE 2</p>
+    <h1>ENTER<br><em>THE VEX.</em></h1>
+    <p class="lead">Forged in the dark. Lit by the fight.<br>Five players. One banner.</p>
+    <div class="actions"><a class="btn primary" href="#roster">VIEW ROSTER</a><a class="btn secondary" href="#matches">MATCH CENTER →</a></div>
+  </div>
+  <div class="hero-logo reveal"><div class="logo-aura"></div><img src="assets/vexryn-logo.png" alt="Team Vexryn"></div>
+  <div class="telemetry"><span>VEXRYN // ONLINE</span><span>REGION // ZA 🇿🇦</span><span>GAME // CS2</span><span>ROSTER // 5 ACTIVE</span></div>
+</section>
+
+<section class="section" id="roster">
+  <div class="heading reveal"><p class="kicker">01 // ACTIVE UNIT</p><h2>THE ROSTER</h2></div>
+  <div class="roster">
+    <article class="player reveal"><b>18</b><div class="initial">X</div><div><small>PLAYER 01</small><h3>Xyloo</h3><p>RIFLER // ZA</p></div></article>
+    <article class="player reveal"><b>02</b><div class="initial">P</div><div><small>PLAYER 02</small><h3>Piesang</h3><p>PLAYER // ZA</p></div></article>
+    <article class="player reveal"><b>03</b><div class="initial">V</div><div><small>PLAYER 03</small><h3>Vortexxxx</h3><p>PLAYER // ZA</p></div></article>
+    <article class="player reveal"><b>04</b><div class="initial">M</div><div><small>PLAYER 04</small><h3>madKMC-</h3><p>PLAYER // ZA</p></div></article>
+    <article class="player reveal"><b>05</b><div class="initial">A</div><div><small>PLAYER 05</small><h3>An4vr1n</h3><p>PLAYER // ZA</p></div></article>
+  </div>
+</section>
+
+<section class="section" id="matches">
+  <div class="heading reveal"><p class="kicker">02 // MATCH CENTER</p><h2>NEXT BATTLE</h2></div>
+  <div class="countdown-panel reveal">
+    <div><small>NEXT OPERATION BEGINS IN</small><strong id="countdownStatus">AWAITING DATE</strong></div>
+    <div class="countdown" id="countdown">
+      <div><b id="days">00</b><span>DAYS</span></div>
+      <div><b id="hours">00</b><span>HOURS</span></div>
+      <div><b id="minutes">00</b><span>MIN</span></div>
+      <div><b id="seconds">00</b><span>SEC</span></div>
+    </div>
+  </div>
+  <div class="match reveal">
+    <div class="match-head"><span class="blue">● UPCOMING</span><span>CS2 // BO3</span></div>
+    <div class="match-main">
+      <div class="side vex"><img src="assets/vexryn-logo.png" alt=""><h3>VEXRYN</h3></div>
+      <div class="vs"><strong>VS</strong><span>TBA</span><small>DATE & TIME TO BE ANNOUNCED</small></div>
+      <div class="side"><div class="unknown">?</div><h3>OPPONENT</h3></div>
+    </div>
+    <div class="match-foot"><span>TOURNAMENT // TBA</span><span>SERVER // TBA</span></div>
+  </div>
+</section>
+
+<section class="section" id="stats">
+  <div class="heading reveal"><p class="kicker">03 // TELEMETRY</p><h2>TEAM STATS</h2></div>
+  <div class="stats">
+    <div class="stat reveal"><strong>0</strong><span>MATCHES</span></div><div class="stat reveal"><strong>0</strong><span>WINS</span></div>
+    <div class="stat reveal"><strong>0%</strong><span>WIN RATE</span></div><div class="stat reveal"><strong>—</strong><span>BEST MAP</span></div>
+  </div>
+</section>
+
+<section class="section" id="media">
+  <div class="heading reveal"><p class="kicker">04 // ARCHIVE</p><h2>MEDIA</h2></div>
+  <div class="media">
+    <button class="tile reveal" data-title="MATCH DAY"><span>01</span><strong>MATCH DAY</strong><small>VEXRYN ARCHIVE</small></button>
+    <button class="tile reveal" data-title="THE ROSTER"><span>02</span><strong>THE ROSTER</strong><small>VEXRYN ARCHIVE</small></button>
+    <button class="tile reveal" data-title="JERSEY"><span>03</span><strong>JERSEY</strong><small>VEXRYN ARCHIVE</small></button>
+  </div>
+</section>
+
+<section class="section" id="leaderboard">
+  <div class="heading reveal"><p class="kicker">05 // PERFORMANCE DATA</p><h2>PLAYER STATS</h2></div>
+  <div class="leaderboard reveal">
+    <div class="leader-row leader-head"><span>#</span><span>PLAYER</span><span>K/D</span><span>ADR</span><span>Aim</span><span>HLTV</span></div>
+    <div class="leader-row top"><span>01</span><strong>Xyloo</strong><span>1.4</span><span>99.7</span><span>96.1</span><span>1.47</span></div>
+    <div class="leader-row"><span>02</span><strong>Piesang</strong><span>1.53</span><span>98</span><span>84.4</span><span>1.44</span></div>
+    <div class="leader-row"><span>03</span><strong>Vortexxxx</strong><span>1.16</span><span>87.2</span><span>82.4</span><span>1.3</span></div>
+    <div class="leader-row"><span>04</span><strong>madKMC-</strong><span>1.38</span><span>107.3</span><span>82.6</span><span>1.45</span></div>
+    <div class="leader-row"><span>05</span><strong>An4vr1n</strong><span>1.04</span><span>77.6</span><span>85.1</span><span>1.06</span></div>
+  </div>
+</section>
+
+<section class="section" id="setups">
+  <div class="heading reveal"><p class="kicker">06 // LOADOUT DATABASE</p><h2>PLAYER SETUPS</h2></div>
+  <div class="setup-tabs reveal" id="setupTabs">
+    <button class="active" data-player="xyloo">XYLOO</button><button data-player="piesang">PIESANG</button><button data-player="vortexxxx">VORTEXXXX</button><button data-player="madkmc">MADKMC-</button><button data-player="an4vr1n">AN4VR1N</button>
+  </div>
+  <div class="setup-card reveal">
+    <div><p class="kicker" id="setupPlayer">XYLOO // LOADOUT</p><h3 id="setupTitle">PLAYER HARDWARE</h3></div>
+    <div class="gear-grid" id="gearGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="highlights">
+  <div class="heading reveal"><p class="kicker">07 // COMBAT RECORDINGS</p><h2>HIGHLIGHT VAULT</h2></div>
+  <div class="highlight-grid">
+    <article class="highlight reveal"><div class="clip-screen"><span>▶</span></div><div><small>CLIP // 001</small><h3>COMING SOON</h3><p>ACES // CLUTCHES // CHAOS</p></div></article>
+    <article class="highlight reveal"><div class="clip-screen"><span>▶</span></div><div><small>CLIP // 002</small><h3>COMING SOON</h3><p>VEXRYN ARCHIVE</p></div></article>
+    <article class="highlight reveal"><div class="clip-screen"><span>▶</span></div><div><small>CLIP // 003</small><h3>COMING SOON</h3><p>VEXRYN ARCHIVE</p></div></article>
+  </div>
+</section>
+
+<section class="section about" id="about">
+  <div class="reveal"><p class="kicker">08 // WHO WE ARE</p><h2>BUILT FOR<br>THE SERVER.</h2><p class="about-text">Team Vexryn is a South African Counter-Strike 2 team built around competition, chemistry and the grind to get better every match.</p></div>
+  <div class="terminal reveal"><p><i>›</i> ORGANISATION: TEAM VEXRYN</p><p><i>›</i> REGION: SOUTH AFRICA</p><p><i>›</i> TITLE: COUNTER-STRIKE 2</p><p><i>›</i> STATUS: <span>ACTIVE</span></p><p class="blink"><i>›</i> _</p></div>
+</section>
+</main>
+
+<footer><div class="brand"><img src="assets/vexryn-logo.png" alt=""><span>VEXRYN</span></div><p>© <span id="year"></span> TEAM VEXRYN // ALL SYSTEMS OPERATIONAL</p><a href="#home">BACK TO TOP ↑</a></footer>
+
+<div class="modal" id="modal"><button id="close">×</button><div><p class="kicker">VEXRYN // ARCHIVE</p><h2 id="modalTitle">MEDIA</h2><p>Team media coming soon.</p></div></div>
+<script src="script.js"></script>
+</body></html>
