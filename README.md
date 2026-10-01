@@ -1,4 +1,4 @@
-# Team Vexryn — V3
+# Team Vexryn 
 
 Added:
 - Real browser-based match countdown
