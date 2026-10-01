@@ -57,23 +57,23 @@ const playerSetups = {
   madkmc: { 
     name:"MADKMC-", 
     gear:[
-      ["MOUSE","TBA"],
-      ["KEYBOARD","TBA"],
-      ["MONITOR","TBA"],
-      ["HEADSET","TBA"],
-      ["RESOLUTION","TBA"],
-      ["DPI / SENS","TBA"]
+      ["MOUSE","Logitech G502 HERO"],
+      ["KEYBOARD","Steelseries Apex 100"],
+      ["MONITOR","Viewsonic VX2458 144HZ"],
+      ["HEADSET","Steelseries Arctis 7P+"],
+      ["RESOLUTION","1920x1080"],
+      ["DPI / SENS","1600/1.00"]
     ] 
   },
   an4vr1n: { 
     name:"AN4VR1N", 
     gear:[
-      ["MOUSE","TBA"],
-      ["KEYBOARD","TBA"],
-      ["MONITOR","TBA"],
-      ["HEADSET","TBA"],
-      ["RESOLUTION","TBA"],
-      ["DPI / SENS","TBA"]
+      ["MOUSE","Steelseries Rival 3"],
+      ["KEYBOARD","Logitech G213"],
+      ["MONITOR","DELL SE2426HG 240HZ"],
+      ["HEADSET","Logitech G733"],
+      ["RESOLUTION","1920x1080"],
+      ["DPI / SENS","700/1.0"]
     ] 
   }
 };
