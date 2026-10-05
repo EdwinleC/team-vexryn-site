@@ -159,6 +159,8 @@ scheduleLightning();
 
 // ===== LEETIFY API =====
 
+let leetifyPlayerData = {};
+
 const LEETIFY_API = "https://api-public.cs-prod.leetify.com/v3/profile";
 
 const vexrynPlayers = [
@@ -222,8 +224,12 @@ async function loadVexrynStats() {
         console.log("VEXRYN // Loading Leetify stats from cache");
 
         Object.entries(cache.players).forEach(([key, data]) => {
-          displayLeetifyPlayer(key, data);
-        });
+
+    leetifyPlayerData[key] = data;
+
+    displayLeetifyPlayer(key, data);
+
+});
 
         return;
       }
@@ -254,9 +260,11 @@ async function loadVexrynStats() {
 
       const data = await response.json();
 
-      players[player.key] = data;
+players[player.key] = data;
 
-      displayLeetifyPlayer(player.key, data);
+leetifyPlayerData[player.key] = data;
+
+displayLeetifyPlayer(player.key, data);
 
       console.log(`VEXRYN // ${player.key} loaded`);
 
@@ -286,7 +294,6 @@ async function loadVexrynStats() {
   }
 }
 
-loadVexrynStats();
 
 
 
@@ -324,6 +331,64 @@ function openPlayerProfile(key) {
 
   document.getElementById("profilePremier").textContent =
     document.getElementById(`${key}-premier`)?.textContent || "—";
+
+    // ===== ANIMATED PERFORMANCE =====
+
+// ===== ANIMATED LEETIFY PERFORMANCE =====
+
+const leetifyData = leetifyPlayerData[key];
+
+const faceitLevel = leetifyData?.ranks?.faceit;
+
+document.getElementById("profileFaceit").textContent =
+    faceitLevel != null
+        ? `LVL ${faceitLevel}`
+        : "—";
+
+function animatePerformanceBar(barId, valueId, value) {
+
+    const bar = document.getElementById(barId);
+    const valueElement = document.getElementById(valueId);
+
+    bar.style.width = "0%";
+
+    if (value == null || Number.isNaN(Number(value))) {
+        valueElement.textContent = "—";
+        return;
+    }
+
+    const score = Number(value);
+
+    valueElement.textContent = score.toFixed(1);
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+
+            bar.style.width =
+                `${Math.min(Math.max(score, 0), 100)}%`;
+
+        });
+    });
+}
+
+animatePerformanceBar(
+    "profileAimBar",
+    "profileAimBarValue",
+    leetifyData?.rating?.aim
+);
+
+animatePerformanceBar(
+    "profilePositioningBar",
+    "profilePositioningBarValue",
+    leetifyData?.rating?.positioning
+);
+
+animatePerformanceBar(
+    "profileUtilityBar",
+    "profileUtilityBarValue",
+    leetifyData?.rating?.utility
+);
+
 
   // Load player hardware
   const gearContainer = document.getElementById("profileGear");

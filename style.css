@@ -336,8 +336,8 @@ body, a, button { cursor:none }
     }
 
     .profile-stats {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    grid-template-columns: repeat(5, 1fr);
+}
 
     #profileGear {
         grid-template-columns: 1fr;
@@ -351,4 +351,109 @@ body, a, button { cursor:none }
 
 .cursor-glow {
     z-index: 10000 !important;
+}
+
+/* ===== LEETIFY ATTRIBUTION ===== */
+
+.leetify-attribution {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.leetify-attribution a {
+    display: inline-flex;
+    opacity: 0.7;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.leetify-attribution a:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.leetify-attribution img {
+    display: block;
+    width: 80px;
+    height: 40px;
+}
+
+/* ===== PLAYER PERFORMANCE ===== */
+
+.profile-performance {
+    margin-top: 30px;
+}
+
+.performance-row {
+    margin-top: 15px;
+}
+
+.performance-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.performance-label span {
+    font-family: Orbitron;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #71879a;
+}
+
+.performance-label strong {
+    font-family: Orbitron;
+    font-size: 11px;
+    color: #eaf7ff;
+}
+
+.performance-track {
+    position: relative;
+    width: 100%;
+    height: 8px;
+
+    background: #07121c;
+    border: 1px solid #183044;
+
+    overflow: hidden;
+}
+
+.performance-fill {
+    width: 0%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        #147cff,
+        #39adff,
+        #8dd7ff
+    );
+
+    box-shadow: 0 0 12px rgba(57, 173, 255, .45);
+
+    transition:
+        width 1.1s cubic-bezier(.16, 1, .3, 1);
+}
+
+.performance-row + .performance-row {
+    margin-top: 18px;
+}
+
+/* ===== HIGHLIGHT VIDEO FIX ===== */
+
+.highlight-grid {
+    align-items: start;
+}
+
+.highlight {
+    min-width: 0;
+    height: auto;
+}
+
+.highlight-video {
+    display: block;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    background: #02070c;
 }
