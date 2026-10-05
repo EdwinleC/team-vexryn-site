@@ -119,3 +119,83 @@ function scheduleLightning(){
   setTimeout(()=>{lightning.classList.remove("flash"); void lightning.offsetWidth; lightning.classList.add("flash"); scheduleLightning()},wait);
 }
 scheduleLightning();
+
+// ===== LEETIFY API =====
+
+const LEETIFY_API = "https://api-public.cs-prod.leetify.com/v3/profile";
+
+const vexrynPlayers = [
+  {
+    key: "xyloo",
+    steamId: "76561198998256189"
+  },
+  {
+    key: "piesang",
+    steamId: "76561199778733993"
+  },
+  {
+    key: "vortexxxx",
+    steamId: "76561198026210094"
+  },
+  {
+    key: "madkmc",
+    steamId: "76561198311851014"
+  },
+  {
+    key: "an4vr1n",
+    steamId: "76561198019298244"
+  }
+];
+
+async function loadLeetifyPlayer(player) {
+  try {
+    const response = await fetch(
+      `${LEETIFY_API}?steam64_id=${player.steamId}`
+    );
+
+    if (!response.ok) {
+      throw new Error(`Leetify returned ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    console.log(`VEXRYN // ${player.key} loaded:`, data);
+
+    document.getElementById(`${player.key}-leetify`).textContent =
+      data.ranks?.leetify != null
+        ? data.ranks.leetify.toFixed(2)
+        : "—";
+
+    document.getElementById(`${player.key}-winrate`).textContent =
+      data.winrate != null
+        ? `${(data.winrate * 100).toFixed(1)}%`
+        : "—";
+
+    document.getElementById(`${player.key}-aim`).textContent =
+      data.rating?.aim != null
+        ? data.rating.aim.toFixed(1)
+        : "—";
+
+    document.getElementById(`${player.key}-premier`).textContent =
+      data.ranks?.premier != null
+        ? data.ranks.premier.toLocaleString()
+        : "—";
+
+  } catch (error) {
+    console.error(
+      `VEXRYN // Failed to load ${player.key}:`,
+      error
+    );
+  }
+}
+
+async function loadVexrynStats() {
+  for (const player of vexrynPlayers) {
+    await loadLeetifyPlayer(player);
+
+    // Wait 1.5 seconds before requesting the next player
+    await new Promise(resolve => setTimeout(resolve, 1500));
+  }
+} 
+
+loadVexrynStats();
