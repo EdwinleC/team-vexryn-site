@@ -319,9 +319,9 @@ body, a, button { cursor:none }
 @media (max-width: 800px) {
 
     .player-modal {
-        padding: 15px;
-        overflow-y: auto;
-    }
+    padding: 40px;
+    overflow: hidden;
+}
 
     .player-modal-content {
         grid-template-columns: 1fr;
@@ -456,4 +456,28 @@ body, a, button { cursor:none }
     height: 220px;
     object-fit: cover;
     background: #02070c;
+}
+
+/* ===== PLAYER DOSSIER SIZE FIX ===== */
+
+.player-modal-content {
+    width: min(1200px, 90vw);
+    height: min(780px, 88vh);
+    max-height: 88vh;
+}
+
+.player-modal-info {
+    overflow-y: auto;
+    padding: 40px 48px;
+    justify-content: flex-start;
+}
+
+.player-modal-image {
+    height: 100%;
+}
+
+.player-modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
