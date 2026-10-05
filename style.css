@@ -139,3 +139,216 @@ body, a, button { cursor:none }
     right: 15px;
     z-index: 4;
 }
+
+/* ===== PLAYER DOSSIER ===== */
+
+.player {
+    cursor: pointer;
+}
+
+.player-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    background:
+        radial-gradient(circle at 30% 50%, rgba(0, 140, 255, .12), transparent 35%),
+        rgba(1, 5, 10, .97);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: .3s ease;
+}
+
+.player-modal.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.player-modal-content {
+    width: min(1100px, 100%);
+    min-height: 650px;
+
+    border: 1px solid #183044;
+    background: #030910;
+
+    display: grid;
+    grid-template-columns: 45% 55%;
+
+    overflow: hidden;
+}
+
+.player-modal-image {
+    position: relative;
+    background: #02060a;
+    overflow: hidden;
+}
+
+.player-modal-image::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(to right, transparent 60%, #030910),
+        linear-gradient(to top, #030910 0%, transparent 40%);
+}
+
+.player-modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.player-modal-info {
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.profile-number {
+    color: #39adff;
+    font-family: Orbitron;
+    font-size: 14px;
+    letter-spacing: 4px;
+    margin-top: 25px;
+}
+
+.player-modal-info h2 {
+    font-family: Orbitron;
+    font-size: clamp(45px, 6vw, 85px);
+    line-height: .95;
+    margin: 10px 0;
+}
+
+.profile-role {
+    color: #71879a;
+    letter-spacing: 2px;
+    font-size: 12px;
+}
+
+.profile-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid #183044;
+    margin-top: 35px;
+}
+
+.profile-stats div {
+    padding: 20px;
+    border-right: 1px solid #183044;
+}
+
+.profile-stats div:last-child {
+    border-right: none;
+}
+
+.profile-stats small {
+    display: block;
+    color: #557086;
+    font-family: Orbitron;
+    font-size: 8px;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.profile-stats strong {
+    font-family: Orbitron;
+    color: #eaf7ff;
+    font-size: 18px;
+}
+
+.profile-loadout {
+    margin-top: 35px;
+}
+
+#profileGear {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.profile-gear-item {
+    border: 1px solid #152a3a;
+    padding: 12px;
+}
+
+.profile-gear-item small {
+    display: block;
+    color: #49657a;
+    font-family: Orbitron;
+    font-size: 7px;
+}
+
+.profile-gear-item strong {
+    font-size: 11px;
+}
+
+.player-modal-close {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+
+    width: 50px;
+    height: 50px;
+
+    border: 1px solid #39adff;
+    background: transparent;
+    color: #39adff;
+
+    font-size: 28px;
+    cursor: pointer;
+
+    z-index: 10;
+}
+
+.player-modal-close:hover {
+    background: #39adff;
+    color: #02060a;
+}
+
+@media (max-width: 800px) {
+
+    .player-modal {
+        padding: 15px;
+        overflow-y: auto;
+    }
+
+    .player-modal-content {
+        grid-template-columns: 1fr;
+    }
+
+    .player-modal-image {
+        height: 350px;
+    }
+
+    .player-modal-info {
+        padding: 30px;
+    }
+
+    .profile-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #profileGear {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Keep custom cursor above player dossier */
+.vex-cursor {
+    z-index: 10001 !important;
+}
+
+.cursor-glow {
+    z-index: 10000 !important;
+}

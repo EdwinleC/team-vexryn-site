@@ -78,6 +78,43 @@ const playerSetups = {
   }
 };
 
+const playerProfiles = {
+  xyloo: {
+    name: "XYLOO",
+    number: "18",
+    role: "RIFLER // SOUTH AFRICA",
+    image: "assets/Edwin.png"
+  },
+
+  piesang: {
+    name: "PIESANG",
+    number: "02",
+    role: "PLAYER // SOUTH AFRICA",
+    image: "assets/Gavin.png"
+  },
+
+  vortexxxx: {
+    name: "VORTEXXXX",
+    number: "03",
+    role: "PLAYER // SOUTH AFRICA",
+    image: "assets/Xavier.png"
+  },
+
+  madkmc: {
+    name: "MADKMC-",
+    number: "04",
+    role: "PLAYER // SOUTH AFRICA",
+    image: "assets/Kaylen.png"
+  },
+
+  an4vr1n: {
+    name: "AN4VR1N",
+    number: "05",
+    role: "PLAYER // SOUTH AFRICA",
+    image: "assets/Tiaan.png"
+  }
+};
+
 function updateCountdown(){
   const diff = new Date(NEXT_MATCH).getTime() - Date.now();
   if(diff <= 0){
@@ -147,55 +184,187 @@ const vexrynPlayers = [
   }
 ];
 
-async function loadLeetifyPlayer(player) {
-  try {
-    const response = await fetch(
-      `${LEETIFY_API}?steam64_id=${player.steamId}`
-    );
+const LEETIFY_CACHE_KEY = "vexryn-leetify-stats";
+const LEETIFY_CACHE_TIME = 30 * 60 * 1000; // 30 minutes
 
-    if (!response.ok) {
-      throw new Error(`Leetify returned ${response.status}`);
-    }
+function displayLeetifyPlayer(key, data) {
+  document.getElementById(`${key}-leetify`).textContent =
+    data.ranks?.leetify != null
+      ? data.ranks.leetify.toFixed(2)
+      : "—";
 
-    const data = await response.json();
+  document.getElementById(`${key}-winrate`).textContent =
+    data.winrate != null
+      ? `${(data.winrate * 100).toFixed(1)}%`
+      : "—";
 
-    console.log(`VEXRYN // ${player.key} loaded:`, data);
+  document.getElementById(`${key}-aim`).textContent =
+    data.rating?.aim != null
+      ? data.rating.aim.toFixed(1)
+      : "—";
 
-    document.getElementById(`${player.key}-leetify`).textContent =
-      data.ranks?.leetify != null
-        ? data.ranks.leetify.toFixed(2)
-        : "—";
-
-    document.getElementById(`${player.key}-winrate`).textContent =
-      data.winrate != null
-        ? `${(data.winrate * 100).toFixed(1)}%`
-        : "—";
-
-    document.getElementById(`${player.key}-aim`).textContent =
-      data.rating?.aim != null
-        ? data.rating.aim.toFixed(1)
-        : "—";
-
-    document.getElementById(`${player.key}-premier`).textContent =
-      data.ranks?.premier != null
-        ? data.ranks.premier.toLocaleString()
-        : "—";
-
-  } catch (error) {
-    console.error(
-      `VEXRYN // Failed to load ${player.key}:`,
-      error
-    );
-  }
+  document.getElementById(`${key}-premier`).textContent =
+    data.ranks?.premier != null
+      ? data.ranks.premier.toLocaleString()
+      : "—";
 }
 
 async function loadVexrynStats() {
-  for (const player of vexrynPlayers) {
-    await loadLeetifyPlayer(player);
 
-    // Wait 1.5 seconds before requesting the next player
-    await new Promise(resolve => setTimeout(resolve, 1500));
+  const cached = localStorage.getItem(LEETIFY_CACHE_KEY);
+
+  if (cached) {
+    try {
+      const cache = JSON.parse(cached);
+
+      if (Date.now() - cache.timestamp < LEETIFY_CACHE_TIME) {
+
+        console.log("VEXRYN // Loading Leetify stats from cache");
+
+        Object.entries(cache.players).forEach(([key, data]) => {
+          displayLeetifyPlayer(key, data);
+        });
+
+        return;
+      }
+    } catch (error) {
+      console.warn("VEXRYN // Invalid Leetify cache");
+    }
   }
-} 
+
+  console.log("VEXRYN // Fetching fresh Leetify stats");
+
+  const players = {};
+
+  for (const player of vexrynPlayers) {
+
+    try {
+
+      const response = await fetch(
+        `${LEETIFY_API}?steam64_id=${player.steamId}`
+      );
+
+      if (!response.ok) {
+        console.warn(
+          `VEXRYN // ${player.key} returned ${response.status}`
+        );
+
+        continue;
+      }
+
+      const data = await response.json();
+
+      players[player.key] = data;
+
+      displayLeetifyPlayer(player.key, data);
+
+      console.log(`VEXRYN // ${player.key} loaded`);
+
+    } catch (error) {
+
+      console.error(
+        `VEXRYN // Failed to load ${player.key}`,
+        error
+      );
+
+    }
+
+    // Don't hammer Leetify
+    await new Promise(resolve => setTimeout(resolve, 2000));
+  }
+
+  if (Object.keys(players).length > 0) {
+
+    localStorage.setItem(
+      LEETIFY_CACHE_KEY,
+      JSON.stringify({
+        timestamp: Date.now(),
+        players
+      })
+    );
+
+  }
+}
 
 loadVexrynStats();
+
+
+
+loadVexrynStats();
+
+// ===== PLAYER DOSSIER =====
+
+const playerModal = document.getElementById("playerModal");
+const playerModalClose = document.getElementById("playerModalClose");
+
+function openPlayerProfile(key) {
+
+  const player = playerProfiles[key];
+  const setup = playerSetups[key];
+
+  if (!player) return;
+
+  document.getElementById("profileName").textContent = player.name;
+  document.getElementById("profileNumber").textContent = `#${player.number}`;
+  document.getElementById("profileRole").textContent = player.role;
+
+  const image = document.getElementById("profileImage");
+  image.src = player.image;
+  image.alt = player.name;
+
+  // Reuse the Leetify stats already displayed in the leaderboard
+  document.getElementById("profileLeetify").textContent =
+    document.getElementById(`${key}-leetify`)?.textContent || "—";
+
+  document.getElementById("profileWinrate").textContent =
+    document.getElementById(`${key}-winrate`)?.textContent || "—";
+
+  document.getElementById("profileAim").textContent =
+    document.getElementById(`${key}-aim`)?.textContent || "—";
+
+  document.getElementById("profilePremier").textContent =
+    document.getElementById(`${key}-premier`)?.textContent || "—";
+
+  // Load player hardware
+  const gearContainer = document.getElementById("profileGear");
+
+  gearContainer.innerHTML = setup
+    ? setup.gear.map(([label, value]) => `
+        <div class="profile-gear-item">
+          <small>${label}</small>
+          <strong>${value}</strong>
+        </div>
+      `).join("")
+    : "";
+
+  playerModal.classList.add("open");
+
+  document.body.style.overflow = "hidden";
+}
+
+function closePlayerProfile() {
+  playerModal.classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+document.querySelectorAll(".player[data-player]").forEach(card => {
+
+  card.addEventListener("click", () => {
+    openPlayerProfile(card.dataset.player);
+  });
+
+});
+
+playerModalClose.addEventListener("click", closePlayerProfile);
+
+playerModal.addEventListener("click", event => {
+  if (event.target === playerModal) {
+    closePlayerProfile();
+  }
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    closePlayerProfile();
+  }
+});
